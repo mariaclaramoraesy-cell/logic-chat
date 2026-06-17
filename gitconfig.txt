@@ -1,0 +1,2 @@
+git config --global user.name MariaClara
+git config -- user.email mariaclaramoraesy@gmail.com
