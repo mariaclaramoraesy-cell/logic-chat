@@ -27,12 +27,13 @@ const resultadoResumo = document.getElementById('resultadoResumo');
 
 // O array abaixo será usado nas próximas etapas.
 let mensagens = [];
-let totalMensagens = 0;
 
-// ETAPA 2
-// Use o valor do select para mudar o tipo da mensagem: aluno, bot ou sistema.
+// ETAPA 1
+// Crie uma função para enviar uma mensagem digitada no textarea.
 function enviarMensagem() {
-    const autor = autorMensagem.value;
+    // TODO: ler o texto digitado
+    // TODO: validar se está vazio
+    // TODO: criar a mensagem na tela
     const texto = textoMensagem.value.trim();
 
     if (texto ===''){
@@ -40,27 +41,14 @@ function enviarMensagem() {
         return; 
     }
 
-    let classe = 'message--sistema';
-    let nomeAutor = 'Sistema';
-
-    if (autor == 'aluno') {
-        classe = 'message--aluno';
-        nomeAutor = 'Aluno';
-    } else if (autor == 'bot') {
-        classe = 'message--bot';
-        nomeAutor = 'Bot';
-    }
-
-    if (totalMensagens == 0) {
     listaMensagens.innerHTML = '';
-    }
 
     const caixa = document.createElement('div');
-    caixa.className = 'message ' + classe;
+    caixa.className = 'message message--aluno';
 
     const meta = document.createElement('span');
-    meta.className = 'message__meta';
-    meta.textContent = nomeAutor;
+    meta.className = 'message_meta';
+    meta.textContent = 'Aluno';
 
     const paragrafo = document.createElement('p');
     paragrafo.textContent = texto;
@@ -68,8 +56,7 @@ function enviarMensagem() {
     caixa.appendChild(meta);
     caixa.appendChild(paragrafo)
     listaMensagens.appendChild(caixa);
-    totalMensagens++;
-    statusChat.textContent = totalMensagens+ ' mensagem(ns) enviada(s) no chat.';
+    statusChat.textContent = '1 mensagem enviada.';
     textoMensagem.value = '';
 }
 
@@ -92,7 +79,6 @@ btnEnviar.addEventListener('click', enviarMensagem);
 
 btnLimpar.addEventListener('click', function () {
     mensagens = [];
-    totalMensagens = 0;
     listaMensagens.innerHTML = '<div class="empty-state"><strong>Chat vazio</strong><span>Use o painel ao lado para começar.</span></div>';
     statusChat.textContent = 'Nenhuma mensagem carregada.';
     resultadoResumo.textContent = 'O resumo aparecerá aqui.';
